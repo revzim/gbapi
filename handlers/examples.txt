@@ -1,0 +1,46 @@
+# TEST DATA 
+## ID: <ID>
+## EMAIL: <EMAIL>
+## PASSWORD: <PW>
+## TOKEN: <TOKEN>
+
+
+## SIGN UP
+curl   -X POST   http://localhost:8080/signup   -H "Content-Type: application/json"   -d '{"email":"az@test.com","password":"PASSWORD", "username":"az"}'
+
+-- RETURN RESPONSE : {"id":"5e74e3b3d912c34d9542923d","email":"az@test.com","password":"PASSWORD","username":"az"}
+
+
+## LOGIN
+curl   -X POST   http://localhost:8080/login   -H "Content-Type: application/json"   -d '{"email":"az@test.com","password":"PASSWORD"}'
+
+-- RETURN RESPONSE : {"id":"5e74e3b3d912c34d9542923d","email":"az@test.com","username":"az",
+        "token":"AUTH_TOKEN"}
+
+
+## UPLOAD SAVE TO CLOUD
+curl \
+  -F save_file=@SAVE_GUID_BPRE01_1584562742646.export \
+  -X POST \
+  http://localhost:8080/saves/new/SAVE_GUID_BPRE01 \
+  -H "Authorization: Bearer AUTH_TOKEN"
+
+
+## GET ALL SAVES
+curl \
+  -X GET \
+  http://localhost:8080/saves \
+  -H "Authorization: Bearer AUTH_TOKEN"
+
+
+## GET SAVE
+curl \
+  -X GET \
+  http://localhost:8080/saves/game/SAVE_GUID_BPRE01 \
+  -H "Authorization: Bearer AUTH_TOKEN"
+
+curl \
+  -F save_file=@/home/azim/Downloads/SAVE_GUID_BPRE01_1584887209957.export \
+  -X POST \
+  http://localhost:8081/saves/upd2/SAVE_GUID_BPRE01 \
+  -H "Authorization: Bearer AUTH_TOKEN"

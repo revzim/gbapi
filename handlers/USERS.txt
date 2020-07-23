@@ -1,0 +1,8 @@
+{"id":"5e74e3b3d912c34d9542923d","email":"az@test.com","password":"pw123","username":"az"}
+{"id":"5e78d11bd912c3171de32b58","email":"ma@test.com","password":"ma16","username":"ma"}
+{"id":"5e78d13ad912c3171de32b59","email":"dz@test.com","password":"dz16","username":"dz"}
+
+
+{"id":"5e78e178db9dac058cf80103","email":"az@test.com","password":"pw123","username":"az"}
+{"id":"5e78e189db9dac058cf80104","email":"dz@test.com","password":"dz16","username":"dz"}
+{"id":"5e78e193db9dac058cf80105","email":"ma@test.com","password":"ma16","username":"ma"}
