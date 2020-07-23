@@ -12,6 +12,8 @@ import (
 	"gopkg.in/mgo.v2/bson"
 )
 
+// CreateSave -
+// CREATE CLOUD SAVE
 func (h *Handler) CreateSave(c echo.Context) (err error) {
 	// INIT USER
 	ctxUser := &models.User{
@@ -117,6 +119,8 @@ func initGridFile(fileBytes []byte, db *mgo.Database, filename string) (*mgo.Gri
 	return saveFile, nil
 }
 
+// UpdateSave -
+// UPDATE CLOUD SAVE IN MONGO
 func (h *Handler) UpdateSave(c echo.Context) (err error) {
 	// INIT USER
 	ctxUser := &models.User{
@@ -173,6 +177,8 @@ func (h *Handler) UpdateSave(c echo.Context) (err error) {
 
 }
 
+// UpsertSave -
+// MONGO UPSERT CLOUD SAVE
 func (h *Handler) UpsertSave(c echo.Context) (err error) {
 	// INIT USER
 	ctxUser := &models.User{
@@ -232,6 +238,8 @@ func (h *Handler) UpsertSave(c echo.Context) (err error) {
 	})
 }
 
+// FetchAllSaves -
+// FETCHES ALL SAVES W/ PROVDIED USER ID
 func (h *Handler) FetchAllSaves(c echo.Context) (err error) {
 	// c.Response().Header().Set(echo.HeaderAccessControlAllowOrigin, "http://azimu:8080")
 	// println("access:", c.Response().Header().Get(echo.HeaderAccessControlAllowOrigin))
@@ -253,6 +261,8 @@ func (h *Handler) FetchAllSaves(c echo.Context) (err error) {
 
 }
 
+// FetchSave -
+// FETCHES SAVE W/ PROVDIDED GAME NAME
 func (h *Handler) FetchSave(c echo.Context) (err error) {
 
 	// GET ID FROM TOKEN

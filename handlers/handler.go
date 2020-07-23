@@ -10,19 +10,28 @@ import (
 )
 
 var (
+	// Key -
+	// KEY USED FOR MONOGDB
 	Key []byte
 )
 
 type (
+	// Handler -
+	// MONGODB & API HANDLER
 	Handler struct {
 		DB *mgo.Session
 	}
+
+	// HandlerErr -
+	// HANDLER ERR
 	HandlerErr struct {
 		Code   string `json:"code"`
 		Reason string `json:"reason"`
 	}
 )
 
+// New -
+// RETURNS NEW HANDLER W/ PROVIDED KEY
 func New(key []byte, db *mgo.Session) *Handler {
 	Key = key
 	return &Handler{
@@ -30,6 +39,8 @@ func New(key []byte, db *mgo.Session) *Handler {
 	}
 }
 
+// NewErr -
+// RETURNS NEW ERROR
 func NewErr(msg string) *HandlerErr {
 	msgArr := formatErrorString(msg)
 	return &HandlerErr{
@@ -46,6 +57,8 @@ func formatErrorString(errStr string) []string {
 	return []string{code, reason}
 }
 
+// HandleUpsert -
+// HANDLER FOR MONGO UPSERTS
 func (h *Handler) HandleUpsert(saveData, owner string) map[string]bson.M {
 	// UPDATED QUERY VAL
 	update := bson.M{"$set": bson.M{"save": saveData}}
@@ -57,14 +70,20 @@ func (h *Handler) HandleUpsert(saveData, owner string) map[string]bson.M {
 	}
 }
 
+// InitUpdateSave -
+// BSON HELPER FOR UPDATES
 func (h *Handler) InitUpdateSave(saveData []byte) bson.M {
 	return bson.M{"$set": bson.M{"save": saveData, "last_update": time.Now().Unix()}}
 }
 
+// InitUpsertSave -
+// BSON HELPER FOR UPSERT CLOUD SAVES
 func (h *Handler) InitUpsertSave(id, name, owner string, saveData []byte) bson.M {
 	return bson.M{"$set": bson.M{"id": owner + "_" + name, "owner": owner, "last_update": time.Now().Unix(), "name": name, "save": saveData}}
 }
 
+// InitUpsertIDMsg -
+// BSON HELPER FOR UPSERT ID
 func (h *Handler) InitUpsertIDMsg(saveData []byte) bson.M {
 	return bson.M{"$set": bson.M{"save": saveData, "last_update": time.Now().Unix()}}
 }

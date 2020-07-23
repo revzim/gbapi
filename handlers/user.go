@@ -11,6 +11,8 @@ import (
 	"gopkg.in/mgo.v2/bson"
 )
 
+// Signup -
+// SIGNUP FOR A CLOUD SAVE ACCOUNT
 func (h *Handler) Signup(c echo.Context) (err error) {
 
 	// INIT USER
@@ -39,6 +41,8 @@ func (h *Handler) Signup(c echo.Context) (err error) {
 
 }
 
+// Login -
+// LOG IN TO GBA CLOUD SAVE DB & AUTHENTICATE FOR WEBAPP
 func (h *Handler) Login(c echo.Context) (err error) {
 
 	// c.Response().Header().Set(echo.HeaderAccessControlAllowOrigin, "http://azimu:8080")
@@ -87,28 +91,6 @@ func (h *Handler) Login(c echo.Context) (err error) {
 	ctxUser.Password = ""
 
 	return c.JSON(http.StatusOK, ctxUser)
-
-}
-
-func (h *Handler) Follow(c echo.Context) (err error) {
-	// GET USER ID FROM CTX TOKEN
-	userID := userIDFromToken(c)
-
-	// GET ID FROM PARAM
-	id := c.Param("id")
-
-	// ADD NEW ID AS FOLLOWER TO USER
-	db := h.DB.Clone()
-	defer db.Close()
-
-	if err = db.DB(models.GBADB).C("users").
-		UpdateId(bson.ObjectIdHex(id), bson.M{"$addToSet": bson.M{"followers": userID}}); err != nil {
-		if err == mgo.ErrNotFound {
-			return echo.ErrNotFound
-		}
-	}
-
-	return
 
 }
 

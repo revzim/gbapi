@@ -13,6 +13,8 @@ const (
 	GBADB = "GBA SAVE MONGODB NAME"
 )
 
+// JWTCustomClaims -
+// JSON WEB TOKEN CUSTOM CLAIMS
 type JWTCustomClaims struct {
 	Name  string        `json:"name"`
 	Admin bool          `json:"admin"`
@@ -21,6 +23,8 @@ type JWTCustomClaims struct {
 	jwt.StandardClaims
 }
 
+// GBASave -
+// CLOUD SAVE DATA STRUCT
 type GBASave struct {
 	ID         string `json:"id" bson:"_id"`
 	Owner      string `json:"owner" bson:"owner"`
@@ -29,6 +33,8 @@ type GBASave struct {
 	LastUpdate int64  `json:"last_update" bson:"last_update,omitempty"`
 }
 
+// NewGBASave -
+// RETURNS NEW GBA SAVE
 func NewGBASave(owner, name string, save []byte) *GBASave {
 	id := owner + "_" + name
 	return &GBASave{
